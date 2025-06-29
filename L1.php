@@ -1,0 +1,330 @@
+<?php
+include 'CARGA_INICIAL.php';
+
+/**********************EN ESTE FRAGMENTO DE CODIGO SE CREA LA MATRIZ ESCENA Y SE LLENA DE CEROS****************************************** */
+for ($I=1; $I <=32 ; $I++) 
+{     
+    for ($J=1; $J <=5 ; $J++) 
+    { 
+        for ($K=1; $K<=15000 ; $K++) 
+        { 
+            $ESCENA[$I][$J][$K]=0;
+        }
+    }
+}
+/************************************************************************************************************************************* */
+
+/*******************EN ESTE FRAGMENTO DE CODIGO SE CREA LA MATRIZ HISTORIA Y EL ARRAY PREFIJO  */
+/*HISTORIA CONTIENE TODOS LOS PASOS REALIZADOS DE LOS POSIBLES CASOS QUE PUEDEN PRESENTARSE **/
+
+for ($J=1; $J <=35000 ; $J++) 
+{ 
+    $PREFIJO[$J]=0;
+    for ($K=1; $K<=500 ; $K++) 
+    { 
+        $HISTORIA[$J][$K]=0;
+        if ($K==1) 
+        {
+            $HISTORIA[$J][$K]=1;
+        }
+    }
+}
+
+$HISTORIA[1][1]=4;
+
+$HISTORIA[3][1]=8;
+
+/****************************************************************************** */
+/************SE CREA LA MATRIZ QUE CONTIENE LAS CARACTERISTICAS DEL UNIVEERSO DEL JUEGO**************************************************/
+#LA COLUMNA 1 INDICA EL NUMERO DE PIEZA CADA PIEZA TIENE SU NUMERO ES COMO SU CEDULA O NOMBRE
+#LA COLUMNA 2 INDICA LA POSICION DE CADA PIEZA 
+#LA COLUMNA 3 INDICA EL TIPO DE PIEZA 1=TORRE, 2=CABALLO, 3=ALFIL, 4=REY, 5=REINA, 6= PEON
+#COLUMNA 4 INDICA EL BANDO 1 BLANCO 2 NEGRO
+#COLUMNA 5 INDICA ESTADO DE LA PIEZA 1= ACTIVO,  0= MUERTO
+#COLUMNA 6 INDICA OPORTUNIDAD  1 ACTIVA 0 INACTIVA
+
+#LA COLUMNA 1 INDICA EL NUMERO DE PIEZA
+$MATRIZ[1][1]=1;
+$MATRIZ[2][1]=2;
+$MATRIZ[3][1]=3;
+$MATRIZ[4][1]=4;
+$MATRIZ[5][1]=5;
+$MATRIZ[6][1]=6;
+$MATRIZ[7][1]=7;
+$MATRIZ[8][1]=8;
+$MATRIZ[9][1]=9;
+$MATRIZ[10][1]=10;
+$MATRIZ[11][1]=11;
+$MATRIZ[12][1]=12;
+$MATRIZ[13][1]=13;
+$MATRIZ[14][1]=14;
+$MATRIZ[15][1]=15;
+$MATRIZ[16][1]=16;
+$MATRIZ[17][1]=17;
+$MATRIZ[18][1]=18;
+$MATRIZ[19][1]=19;
+$MATRIZ[20][1]=20;
+$MATRIZ[21][1]=21;
+$MATRIZ[22][1]=22;
+$MATRIZ[23][1]=23;
+$MATRIZ[24][1]=24;
+$MATRIZ[25][1]=25;
+$MATRIZ[26][1]=26;
+$MATRIZ[27][1]=27;
+$MATRIZ[28][1]=28;
+$MATRIZ[29][1]=29;
+$MATRIZ[30][1]=30;
+$MATRIZ[31][1]=31;
+$MATRIZ[32][1]=32;
+
+/*************************************************************************************************/ 
+#LA COLUMNA 2 INDICA LA POSICION DE CADA PIEZA 
+/*****************************************************************************************/
+$ESCENA[1][2][1]=1;//ORIGINALMENTE 1  //TORRE
+$ESCENA[2][2][1]=2;//ORIGINALMENTE 2  //CABALLO
+$ESCENA[3][2][1]=3;//ORIGINALMENTE 3 //ALFIL
+$ESCENA[4][2][1]=4;//ORIGINALMENTE 4//REY
+$ESCENA[5][2][1]=5;//ORIGINALMENTE 5//REINA
+$ESCENA[6][2][1]=6;//ORIGINALMENTE 6//ALFIL
+$ESCENA[7][2][1]=7;//ORIGINALMENTE 7//CABALLO
+$ESCENA[8][2][1]=8;//ORIGINALMENTE 8//TORRE
+$ESCENA[9][2][1]=9;//originalmente era 9 //PEON
+$ESCENA[10][2][1]=10;//ORIGINALMENTE10   //PEON
+$ESCENA[11][2][1]=11;//ORIGINALMENTE 11   //PEON
+$ESCENA[12][2][1]=12;//ORIGINALMENTE 12   //PEON
+$ESCENA[13][2][1]=13;//ORIGINALMENTE 13  //PEON
+$ESCENA[14][2][1]=14;//ORIGINALMENTE 14  //PEON
+$ESCENA[15][2][1]=15;//ORIGINALMENTE 15 //PEON
+$ESCENA[16][2][1]=16;//ORIGINALMENTE 16 //PEON
+$ESCENA[17][2][1]=57;////ORIGINALMENTE 57//TORRE
+$ESCENA[18][2][1]=58;//ORIGINALMENTE 58 //CABALLO
+$ESCENA[19][2][1]=59;//ORIGINALMENTE 59 //ALFIL
+$ESCENA[20][2][1]=60;//ORIGINALMENTE 60//REY
+$ESCENA[21][2][1]=61;//ORIGINALMENTE 61 //REINA
+$ESCENA[22][2][1]=62;//ORIGINALMENTE 62 //ALFIL
+$ESCENA[23][2][1]=63;////ORIGINALMENTE 63//CABALLO
+$ESCENA[24][2][1]=64;//ORIGINALMENTE 64//TORRE
+$ESCENA[25][2][1]=49;//ORIGINALMENTE 49 //PEON
+$ESCENA[26][2][1]=50;//ORIGINALMENTE 50 //PEON
+$ESCENA[27][2][1]=51;//ORIGINALMENTE 51 //PEON
+$ESCENA[28][2][1]=52;//ORIGINALMENTE 52 //PEON 
+$ESCENA[29][2][1]=53;//ORIGINALMENTE 53//PEON
+$ESCENA[30][2][1]=54;//ORIGINALMENTE 54//PEON
+$ESCENA[31][2][1]=55;//ORIGINALMENTE 55//PEON
+$ESCENA[32][2][1]=56;//ORIGINALMENTE 56//PEON
+$ESCENA[33][2][1]=0;//EN ESTA CASILLA SE VA A COLOCAR LA CANTIDAD DE POSIBLES COMBINACIONES QUE PUEDE TENER LA ESCENA
+
+/*****************************************************************************************/ 
+#LA COLUMNA 3 INDICA EL TIPO DE PIEZA 1=TORRE, 2=CABALLO, 3=ALFIL, 4=REY, 5=REINA, 6= PEON
+$MATRIZ[1][3]=1;
+$MATRIZ[2][3]=2;
+$MATRIZ[3][3]=3;
+$MATRIZ[4][3]=4;
+$MATRIZ[5][3]=5;
+$MATRIZ[6][3]=3;
+$MATRIZ[7][3]=2;
+$MATRIZ[8][3]=1;
+$MATRIZ[9][3]=6;
+$MATRIZ[10][3]=6;
+$MATRIZ[11][3]=6;
+$MATRIZ[12][3]=6;
+$MATRIZ[13][3]=6;
+$MATRIZ[14][3]=6;
+$MATRIZ[15][3]=6;
+$MATRIZ[16][3]=6;
+$MATRIZ[17][3]=1;
+$MATRIZ[18][3]=2;
+$MATRIZ[19][3]=3;
+$MATRIZ[20][3]=4;
+$MATRIZ[21][3]=5;
+$MATRIZ[22][3]=3;
+$MATRIZ[23][3]=2;
+$MATRIZ[24][3]=1;
+$MATRIZ[25][3]=6;
+$MATRIZ[26][3]=6;
+$MATRIZ[27][3]=6;
+$MATRIZ[28][3]=6;
+$MATRIZ[29][3]=6;
+$MATRIZ[30][3]=6;
+$MATRIZ[31][3]=6;
+$MATRIZ[32][3]=6;
+
+/********************************************************************************************/
+#COLUMNA 4 INDICA EL BANDO
+$MATRIZ[1][4]=1;
+$MATRIZ[2][4]=1;
+$MATRIZ[3][4]=1;
+$MATRIZ[4][4]=1;
+$MATRIZ[5][4]=1;
+$MATRIZ[6][4]=1;
+$MATRIZ[7][4]=1;
+$MATRIZ[8][4]=1;
+$MATRIZ[9][4]=1;
+$MATRIZ[10][4]=1;
+$MATRIZ[11][4]=1;
+$MATRIZ[12][4]=1;
+$MATRIZ[13][4]=1;
+$MATRIZ[14][4]=1;
+$MATRIZ[15][4]=1;
+$MATRIZ[16][4]=1;
+$MATRIZ[17][4]=2;
+$MATRIZ[18][4]=2;
+$MATRIZ[19][4]=2;
+$MATRIZ[20][4]=2;
+$MATRIZ[21][4]=2;
+$MATRIZ[22][4]=2;
+$MATRIZ[23][4]=2;
+$MATRIZ[24][4]=2;
+$MATRIZ[25][4]=2;
+$MATRIZ[26][4]=2;
+$MATRIZ[27][4]=2;
+$MATRIZ[28][4]=2;
+$MATRIZ[29][4]=2;
+$MATRIZ[30][4]=2;
+$MATRIZ[31][4]=2;
+$MATRIZ[32][4]=2;
+
+/******************************************************************************/
+#COLUMNA 5 INDICA ESTADO DE LA PIEZA 1= ACTIVO,  0= MUERTO
+$MATRIZ[1][5]=1;
+$MATRIZ[2][5]=1;
+$MATRIZ[3][5]=1;
+$MATRIZ[4][5]=1;
+$MATRIZ[5][5]=1;
+$MATRIZ[6][5]=1;
+$MATRIZ[7][5]=1;
+$MATRIZ[8][5]=1;
+$MATRIZ[9][5]=1;
+$MATRIZ[10][5]=1;
+$MATRIZ[11][5]=1;
+$MATRIZ[12][5]=1;
+$MATRIZ[13][5]=1;
+$MATRIZ[14][5]=1;
+$MATRIZ[15][5]=1;
+$MATRIZ[16][5]=1;
+$MATRIZ[17][5]=1;
+$MATRIZ[18][5]=1;
+$MATRIZ[19][5]=1;
+$MATRIZ[20][5]=1;
+$MATRIZ[21][5]=1;
+$MATRIZ[22][5]=1;
+$MATRIZ[23][5]=1;
+$MATRIZ[24][5]=1;
+$MATRIZ[25][5]=1;
+$MATRIZ[26][5]=1;
+$MATRIZ[27][5]=1;
+$MATRIZ[28][5]=1;
+$MATRIZ[29][5]=1;
+$MATRIZ[30][5]=1;
+$MATRIZ[31][5]=1;
+$MATRIZ[32][5]=1;
+/***************************************************************************************/
+#COLUMNA 6 INDICA OPORTUNIDAD
+$MATRIZ[1][6]=1;
+$MATRIZ[2][6]=1;
+$MATRIZ[3][6]=1;
+$MATRIZ[4][6]=1;
+$MATRIZ[5][6]=1;
+$MATRIZ[6][6]=1;
+$MATRIZ[7][6]=1;
+$MATRIZ[8][6]=1;
+$MATRIZ[9][6]=1;
+$MATRIZ[10][6]=1;
+$MATRIZ[11][6]=1;
+$MATRIZ[12][6]=1;
+$MATRIZ[13][6]=1;
+$MATRIZ[14][6]=1;
+$MATRIZ[15][6]=1;
+$MATRIZ[16][6]=1;
+$MATRIZ[17][6]=2;
+$MATRIZ[18][6]=2;
+$MATRIZ[19][6]=2;
+$MATRIZ[20][6]=2;
+$MATRIZ[21][6]=2;
+$MATRIZ[22][6]=2;
+$MATRIZ[23][6]=2;
+$MATRIZ[24][6]=2;
+$MATRIZ[25][6]=2;
+$MATRIZ[26][6]=2;
+$MATRIZ[27][6]=2;
+$MATRIZ[28][6]=2;
+$MATRIZ[29][6]=2;
+$MATRIZ[30][6]=2;
+$MATRIZ[31][6]=2;
+$MATRIZ[32][6]=2;
+
+
+
+
+
+
+
+
+
+/*************AVANCE FRONTAL PARA TORRE Y DAMA*************************************/
+if(($MATRIZ[$i][3]==1)||($MATRIZ[$i][3]==5))//PARA TORRE =1 Y PARA DAMA =5 
+    {
+                do
+                {
+                    for($j=1; $j <=32 ; $j++)
+                    {
+                        if($j!=$i)
+                        {
+                           // echo "<br>";
+                           // ECHO "COMPARANDO MATRIZ ".$i."2"."CON LA MATRIZ".$j."2";
+                            $ILUSION=$MATRIZ[$i][2]+(8*$L1);
+                            $OTRO= $MATRIZ[$j][2];
+                            //echo "ES DECIR  " .$ILUSION." CON :".$OTRO;
+                            if((($MATRIZ[$i][2]+(8*$L1))==$MATRIZ[$j][2]))
+                            {
+                                $AVANCE=0;
+                               if ($MATRIZ[$j][4]!=$MATRIZ[$i][4])
+                                {
+                                $L1++; 
+                               }
+                            }
+                        }
+                    }
+                    if($AVANCE==1)
+                    {
+                        $L1++;
+                        $ILUSION=$MATRIZ[$i][2]+(8*$L1);
+                    }
+           // echo "<br>";        
+           // echo "se ha determinado a L1=";
+           // echo $L1-1;
+
+                }while(($AVANCE==1)&&($ILUSION<64));
+
+                $L1=$L1-1;
+                if ($L1<=0)
+                 {
+                    $L1=0;
+                }
+            $MATRIZ[$i][7]=$L1;
+    }
+/*********************************FIN AVANCE FRONTAL TORRE Y DAMA ******************************************************************************/
+/******************************************PLANTEA LOS POSIBLES ESCENARIOS PARA LOS MOVIMIENTOS************************************************/
+$ALFA=0;
+//echo "LINEA 349=".$PAS0;
+while ($L1 > $ALFA) {
+$PAS0++;
+//ECHO "<BR>";
+//ECHO "PASO LINEA 351=".$PAS0;
+$ALFA++;
+$ESCENA[$i][2][$PAS0]=$MATRIZ[$i][2]+(8*$ALFA);
+HISTORIAL();
+for ($G=1; $G <$COLUMNA ; $G++) 
+{ 
+    //$HISTORIA[$PAS0+$FIN][$G]=$PREFIJO[$G];
+    $HISTORIA[$TABULADOR][$G]=$PREFIJO[$G];
+    ECHO $PREFIJO[$G]."-";
+}
+$HISTORIA[$TABULADOR][$COLUMNA]=$PAS0;
+$TABULADOR++;
+ECHO $PAS0;
+
+} 
+//ECHO "<BR>";
+/**********************************************************************************************************************************************/
+?>
